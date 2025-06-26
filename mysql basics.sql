@@ -146,3 +146,103 @@ SELECT * FROM STUDENT;
 
 DELETE FROM STUDENT
 WHERE MARKS <50;
+
+
+
+## revisiting the foreign key
+
+create table dept(
+id int primary key,
+name varchar(50)
+);
+
+create table teacher(
+id int primary key,
+name varchar(50),
+dept_id int,
+foreign key (dept_id) references dept(id)
+on update cascade
+on delete cascade
+);
+
+## casading  for foreign key
+## on delete cascade
+## on update cascade
+
+drop table teacher;
+insert into dept values
+(101,"science"),
+(102,"math"),
+(103,"social");
+
+insert into teacher values
+(101, "ramu", 101),
+(102,"suman", 102),
+(103, "katik",103);
+
+select * from teacher;
+select * from dept;
+
+update dept
+set id= 104
+where id=103;
+
+select * from teacher;
+
+
+## table related queries 
+#1.ADD COLUMN
+# DROP COLUMN
+#RENAME TABLE
+#CHANGE COLUMN
+#MODIFY COLUMN
+
+## its already created no need to recreate
+create table student(
+rollno int primary key,
+name varchar(50),
+marks int not null,
+grade varchar(1),
+city varchar(20)
+
+);
+
+insert into student(rollno, name, marks,grade,city) values
+(20, "Manish", 82, "B","kathmandu"),
+(15, "Anish", 62, "B","kathmandu"),
+(5, "Suman", 90, "A","pokhara"),
+(1, "Rakesh", 83, "A","surkhet"),
+(18, "Sangam", 82, "B","Butwal");
+
+select * from student;
+
+# Add column
+ALTER TABLE student
+ADD column remarks varchar(2) ;
+
+# drop column
+alter table student
+drop column remarks;
+
+#rename table
+alter table student
+rename  to don;
+
+select * from don;
+
+# change column
+alter table don
+change column marks mark int not null;
+
+
+#modify column 
+alter table don
+modify column mark int  default 50;
+
+select * from don;
+
+## delete drop & truncate 
+
+# truncate basically delete all the rows from table without hampering a table structure 
+
+TRUNCATE TABLE don;
